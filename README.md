@@ -1,6 +1,9 @@
 # SomTemplate_VR
 
-##Epic VR Template Convert C++ Open Source Project.
+#Epic VR Template Convert C++ Open Source Project.
+
+Unreal Version : 4.18
+Target Template : BP VR Template -> Full CPP VR Template
 
 안녕하세요 솜이불입니다.
 
