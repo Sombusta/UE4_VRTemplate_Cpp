@@ -94,10 +94,10 @@ void ATP_VirtualRealityPawn_Motion::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	float MotionController_Left_Thumbstick_X = UGameplayStatics::GetPlayerController(GetWorld(), 0)->PlayerInput->GetKeyValue(EKeys::MotionController_Left_Thumbstick_X);
-	float MotionController_Left_Thumbstick_Y = UGameplayStatics::GetPlayerController(GetWorld(), 0)->PlayerInput->GetKeyValue(EKeys::MotionController_Left_Thumbstick_Y);
-	float MotionController_Right_Thumbstick_X = UGameplayStatics::GetPlayerController(GetWorld(), 0)->PlayerInput->GetKeyValue(EKeys::MotionController_Right_Thumbstick_X);
-	float MotionController_Right_Thumbstick_Y = UGameplayStatics::GetPlayerController(GetWorld(), 0)->PlayerInput->GetKeyValue(EKeys::MotionController_Right_Thumbstick_Y);
+	float MotionController_Left_Thumbstick_X = InputComponent->GetAxisKeyValue(EKeys::MotionController_Left_Thumbstick_X); // = UGameplayStatics::GetPlayerController(GetWorld(), 0)->PlayerInput->GetKeyValue(EKeys::MotionController_Left_Thumbstick_X);
+	float MotionController_Left_Thumbstick_Y = InputComponent->GetAxisKeyValue(EKeys::MotionController_Left_Thumbstick_Y); // = UGameplayStatics::GetPlayerController(GetWorld(), 0)->PlayerInput->GetKeyValue(EKeys::MotionController_Left_Thumbstick_Y);
+	float MotionController_Right_Thumbstick_X = InputComponent->GetAxisKeyValue(EKeys::MotionController_Right_Thumbstick_X); // = UGameplayStatics::GetPlayerController(GetWorld(), 0)->PlayerInput->GetKeyValue(EKeys::MotionController_Right_Thumbstick_X);
+	float MotionController_Right_Thumbstick_Y = InputComponent->GetAxisKeyValue(EKeys::MotionController_Right_Thumbstick_Y); // = UGameplayStatics::GetPlayerController(GetWorld(), 0)->PlayerInput->GetKeyValue(EKeys::MotionController_Right_Thumbstick_Y);
 
 	// Epic Comment :D // Left Hand Teleport Rotation
 	if (LeftController->GetIsTeleporterActive())
@@ -122,6 +122,9 @@ void ATP_VirtualRealityPawn_Motion::SetupPlayerInputComponent(UInputComponent* P
 	// Set up gameplay key bindings
 	check(PlayerInputComponent);
 
+	// SomWorks :D // Bind Recenter VR events
+	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &ATP_VirtualRealityPawn_Motion::OnResetVR);
+
 	// SomWorks :D // Bind Grab events
 	PlayerInputComponent->BindAction("GrabLeft", IE_Pressed, this, &ATP_VirtualRealityPawn_Motion::GrabActor_Left);
 	PlayerInputComponent->BindAction("GrabLeft", IE_Released, this, &ATP_VirtualRealityPawn_Motion::ReleaseActor_Left);
@@ -133,9 +136,6 @@ void ATP_VirtualRealityPawn_Motion::SetupPlayerInputComponent(UInputComponent* P
 	PlayerInputComponent->BindAction("TeleportLeft", IE_Released, this, &ATP_VirtualRealityPawn_Motion::TeleportReleased_Left);
 	PlayerInputComponent->BindAction("TeleportRight", IE_Pressed, this, &ATP_VirtualRealityPawn_Motion::TeleportPressed_Right);
 	PlayerInputComponent->BindAction("TeleportRight", IE_Released, this, &ATP_VirtualRealityPawn_Motion::TeleportReleased_Right);
-
-	// SomWorks :D // Bind Recenter VR events
-	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &ATP_VirtualRealityPawn_Motion::OnResetVR);
 }
 
 void ATP_VirtualRealityPawn_Motion::OnResetVR()
