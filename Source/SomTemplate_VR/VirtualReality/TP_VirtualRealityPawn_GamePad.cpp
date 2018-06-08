@@ -1,5 +1,5 @@
-// Copyright 2014-2018 Sombusta, All Rights Reserved.
-// SomWorks :D // Epic VR Template Convert C++ Open Source Project.
+// Copyright (c) 2014-2018 Sombusta, All Rights Reserved.
+// SomWorks :D // MIT LICENSE // Epic VR Template Convert C++ Open Source Project.
 
 #include "TP_VirtualRealityPawn_GamePad.h"
 #include "UObject/ConstructorHelpers.h"
@@ -114,7 +114,7 @@ ATP_VirtualRealityPawn_GamePad::ATP_VirtualRealityPawn_GamePad()
 void ATP_VirtualRealityPawn_GamePad::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 	// Epic Comment :D // Setup HMD Camera Height
 	FName DeviceName = UHeadMountedDisplayFunctionLibrary::GetHMDDeviceName();
 
@@ -131,8 +131,11 @@ void ATP_VirtualRealityPawn_GamePad::BeginPlay()
 	}
 
 	// Epic Comments :D // Create MID to give activation feedback during teleportation.
-	RingGlowMatInst = UMaterialInstanceDynamic::Create(TeleportPin->GetMaterial(0), this);
-	TeleportPin->SetMaterial(0, RingGlowMatInst);
+	
+	//=============// RingGlowMatInst = UMaterialInstanceDynamic::Create(TeleportPin->GetMaterial(0), this);
+	// SomWorks :D // TeleportPin->SetMaterial(0, RingGlowMatInst);
+	//=============// RingGlowMatInst = TeleportPin->CreateAndSetMaterialInstanceDynamic(0);
+	RingGlowMatInst = TeleportPin->CreateDynamicMaterialInstance(0);
 }
 
 // Called every frame
@@ -162,7 +165,7 @@ void ATP_VirtualRealityPawn_GamePad::Tick(float DeltaTime)
 	float HeightScaleValue = bLocationPinned ? 1.0f : 0.35f; // = UKismetMathLibrary::SelectFloat(1.0f, 0.35f, bLocationPinned);	
 	
 	// Epic Comment :D // Adjust fall-off of the glowing cylinder.
-	RingGlowMatInst->SetScalarParameterValue("HeightScale", HeightScaleValue);
+	RingGlowMatInst->SetScalarParameterValue(TEXT("HeightScale"), HeightScaleValue);
 
 	FRotator DeviceRotation;
 	FVector DevicePosition;
@@ -190,7 +193,7 @@ void ATP_VirtualRealityPawn_GamePad::SetupPlayerInputComponent(UInputComponent* 
 	PlayerInputComponent->BindAction("HMDTeleport", IE_Pressed, this, &ATP_VirtualRealityPawn_GamePad::HMDTeleportPressed);
 	PlayerInputComponent->BindAction("HMDTeleport", IE_Released, this, &ATP_VirtualRealityPawn_GamePad::HMDTeleportReleased);
 
-	// SomWorks :D // Bind Input Axis
+	// SomWorks :D // Bind Input Axises
 	PlayerInputComponent->BindAxis(TEXT("TeleportDirectionUp"));
 	PlayerInputComponent->BindAxis(TEXT("TeleportDirectionRight"));
 }

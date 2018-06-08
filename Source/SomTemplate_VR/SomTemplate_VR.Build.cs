@@ -1,5 +1,5 @@
-// Copyright 2014-2018 Sombusta, All Rights Reserved.
-// SomWorks :D // Epic VR Template Convert C++ Open Source Project.
+// Copyright (c) 2014-2018 Sombusta, All Rights Reserved.
+// SomWorks :D // MIT LICENSE // Epic VR Template Convert C++ Open Source Project.
 
 using UnrealBuildTool;
 
@@ -10,7 +10,7 @@ public class SomTemplate_VR : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
         // SomWorks :D // Add HeadMountedDisplay, UMG Modules for Use HeadMountedDisplayFunctionLibrary
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "UMG" });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay" });
 
         // SomWorks :D // Add SteamVR, SteamVRController Modules for Use Vive Components
         PrivateDependencyModuleNames.AddRange(new string[] { "SteamVR", "SteamVRController" });

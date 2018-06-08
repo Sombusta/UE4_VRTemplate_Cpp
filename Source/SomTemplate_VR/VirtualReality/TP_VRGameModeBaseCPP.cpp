@@ -1,5 +1,5 @@
-// Copyright 2014-2018 Sombusta, All Rights Reserved.
-// SomWorks :D // Epic VR Template Convert C++ Open Source Project.
+// Copyright (c) 2014-2018 Sombusta, All Rights Reserved.
+// SomWorks :D // MIT LICENSE // Epic VR Template Convert C++ Open Source Project.
 
 #include "TP_VRGameModeBaseCPP.h"
 #include "TP_VirtualRealityPawn_Motion.h"

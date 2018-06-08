@@ -1,5 +1,5 @@
-// Copyright 2014-2018 Sombusta, All Rights Reserved.
-// SomWorks :D // Epic VR Template Convert C++ Open Source Project.
+// Copyright (c) 2014-2018 Sombusta, All Rights Reserved.
+// SomWorks :D // MIT LICENSE // Epic VR Template Convert C++ Open Source Project.
 
 #include "TP_VirtualRealityPawn_Motion.h"
 #include "TP_MotionController.h"
@@ -94,10 +94,10 @@ void ATP_VirtualRealityPawn_Motion::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	float MotionController_Left_Thumbstick_X = InputComponent->GetAxisKeyValue(EKeys::MotionController_Left_Thumbstick_X); // = UGameplayStatics::GetPlayerController(GetWorld(), 0)->PlayerInput->GetKeyValue(EKeys::MotionController_Left_Thumbstick_X);
-	float MotionController_Left_Thumbstick_Y = InputComponent->GetAxisKeyValue(EKeys::MotionController_Left_Thumbstick_Y); // = UGameplayStatics::GetPlayerController(GetWorld(), 0)->PlayerInput->GetKeyValue(EKeys::MotionController_Left_Thumbstick_Y);
-	float MotionController_Right_Thumbstick_X = InputComponent->GetAxisKeyValue(EKeys::MotionController_Right_Thumbstick_X); // = UGameplayStatics::GetPlayerController(GetWorld(), 0)->PlayerInput->GetKeyValue(EKeys::MotionController_Right_Thumbstick_X);
-	float MotionController_Right_Thumbstick_Y = InputComponent->GetAxisKeyValue(EKeys::MotionController_Right_Thumbstick_Y); // = UGameplayStatics::GetPlayerController(GetWorld(), 0)->PlayerInput->GetKeyValue(EKeys::MotionController_Right_Thumbstick_Y);
+	float MotionController_Left_Thumbstick_X = InputComponent->GetAxisValue(TEXT("MotionControllerThumbLeft_X")); // = UGameplayStatics::GetPlayerController(GetWorld(), 0)->PlayerInput->GetKeyValue(EKeys::MotionController_Left_Thumbstick_X);
+	float MotionController_Left_Thumbstick_Y = InputComponent->GetAxisValue(TEXT("MotionControllerThumbLeft_Y")); // = UGameplayStatics::GetPlayerController(GetWorld(), 0)->PlayerInput->GetKeyValue(EKeys::MotionController_Left_Thumbstick_Y);
+	float MotionController_Right_Thumbstick_X = InputComponent->GetAxisValue(TEXT("MotionControllerThumbRight_X")); // = UGameplayStatics::GetPlayerController(GetWorld(), 0)->PlayerInput->GetKeyValue(EKeys::MotionController_Right_Thumbstick_X);
+	float MotionController_Right_Thumbstick_Y = InputComponent->GetAxisValue(TEXT("MotionControllerThumbRight_Y")); // = UGameplayStatics::GetPlayerController(GetWorld(), 0)->PlayerInput->GetKeyValue(EKeys::MotionController_Right_Thumbstick_Y);
 
 	// Epic Comment :D // Left Hand Teleport Rotation
 	if (LeftController->GetIsTeleporterActive())
@@ -136,6 +136,12 @@ void ATP_VirtualRealityPawn_Motion::SetupPlayerInputComponent(UInputComponent* P
 	PlayerInputComponent->BindAction("TeleportLeft", IE_Released, this, &ATP_VirtualRealityPawn_Motion::TeleportReleased_Left);
 	PlayerInputComponent->BindAction("TeleportRight", IE_Pressed, this, &ATP_VirtualRealityPawn_Motion::TeleportPressed_Right);
 	PlayerInputComponent->BindAction("TeleportRight", IE_Released, this, &ATP_VirtualRealityPawn_Motion::TeleportReleased_Right);
+
+	// SomWorks :D // Bind Input Axises
+	PlayerInputComponent->BindAxis(TEXT("MotionControllerThumbLeft_Y"));
+	PlayerInputComponent->BindAxis(TEXT("MotionControllerThumbLeft_X"));
+	PlayerInputComponent->BindAxis(TEXT("MotionControllerThumbRight_Y"));
+	PlayerInputComponent->BindAxis(TEXT("MotionControllerThumbRight_X"));
 }
 
 void ATP_VirtualRealityPawn_Motion::OnResetVR()
