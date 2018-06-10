@@ -205,7 +205,10 @@ void ATP_MotionController::OnConstruction(const FTransform & Transform)
 {
 	Super::OnConstruction(Transform);
 
-	MotionController->Hand = Hand;
+	MotionController->Hand = Hand; // 4.18 Code
+
+	// SomWorks :D // Deprecated Hand Variable in 4.19, Use this API.
+	// MotionController->SetTrackingSource(Hand); // 4.19 Code
 }
 
 // Called when the game starts or when spawned
