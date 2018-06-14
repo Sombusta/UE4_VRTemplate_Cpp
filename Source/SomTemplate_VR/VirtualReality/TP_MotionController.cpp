@@ -12,7 +12,6 @@
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "AI/Navigation/NavigationSystem.h"
 #include "Haptics/HapticFeedbackEffect_Base.h"
-#include "Animation/AnimBlueprint.h"
 #include "Components/SceneComponent.h"
 #include "Components/ArrowComponent.h"
 #include "Components/SphereComponent.h"
@@ -32,9 +31,16 @@ ATP_MotionController::ATP_MotionController()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	// SomWorks :D // Object Initialize
+	// SomWorks :D // Object Initialize	
+	
+	//=============// Animation Blueprint // Do not use this code, this code is only working on editor.in package game, this code will fatal error!
+	// SomWorks :D // static ConstructorHelpers::FObjectFinder<UAnimBlueprint> AnimBP_HandAnimation(TEXT("AnimBlueprint'/Game/VirtualReality/Mannequin/Animations/AnimBP_SomRightHand.AnimBP_SomRightHand'"));
+	//=============// HandMesh->SetAnimInstanceClass(AnimBP_HandAnimation.Object->GeneratedClass);
+	
+	// SomWorks :D // Animation Blueprint // cast "UClass" and Asset path is Different Why? -> Because UAnimBlueprint Class will crash a packaged game. so use postfix "_C", animation blueprint cast to UClass.
+	static ConstructorHelpers::FObjectFinder<UClass> AnimBP_HandAnimation(TEXT("Class'/Game/VirtualReality/Mannequin/Animations/AnimBP_SomRightHand.AnimBP_SomRightHand_C'"));
+
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SK_Hand(TEXT("SkeletalMesh'/Game/VirtualReality/Mannequin/Character/Mesh/MannequinHand_Right.MannequinHand_Right'"));
-	static ConstructorHelpers::FObjectFinder<UAnimBlueprint> AnimBP_HandAnimation(TEXT("AnimBlueprint'/Game/VirtualReality/Mannequin/Animations/AnimBP_SomRightHand.AnimBP_SomRightHand'"));
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> SM_Sphere(TEXT("StaticMesh'/Engine/BasicShapes/Sphere.Sphere'"));
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> SM_Cylinder(TEXT("StaticMesh'/Engine/BasicShapes/Cylinder.Cylinder'"));
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> SM_FatCylinder(TEXT("StaticMesh'/Game/VirtualReality/Meshes/SM_FatCylinder.SM_FatCylinder'"));
@@ -80,7 +86,7 @@ ATP_MotionController::ATP_MotionController()
 		HandMesh->SetAnimationMode(EAnimationMode::AnimationBlueprint);
 		if (AnimBP_HandAnimation.Succeeded())
 		{
-			HandMesh->SetAnimInstanceClass(AnimBP_HandAnimation.Object->GeneratedClass);
+			HandMesh->SetAnimInstanceClass(AnimBP_HandAnimation.Object);
 		}
 	}
 
