@@ -33,7 +33,7 @@ ATP_MotionController::ATP_MotionController()
 
 	// SomWorks :D // Object Initialize	
 	
-	//=============// Animation Blueprint // Do not use this code, this code is only working on editor.in package game, this code will fatal error!
+	//=============// Animation Blueprint // Do not use this code, this code is only working on editor. in package game, this code will fatal error!
 	// SomWorks :D // static ConstructorHelpers::FObjectFinder<UAnimBlueprint> AnimBP_HandAnimation(TEXT("AnimBlueprint'/Game/VirtualReality/Mannequin/Animations/AnimBP_SomRightHand.AnimBP_SomRightHand'"));
 	//=============// HandMesh->SetAnimInstanceClass(AnimBP_HandAnimation.Object->GeneratedClass);
 	

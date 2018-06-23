@@ -9,7 +9,7 @@ public class SomTemplate_VR : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-        // SomWorks :D // Add HeadMountedDisplay, UMG Modules for Use HeadMountedDisplayFunctionLibrary
+        // SomWorks :D // Add HeadMountedDisplay Modules for Use HeadMountedDisplayFunctionLibrary
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay" });
 
         // SomWorks :D // Add SteamVR, SteamVRController Modules for Use Vive Components
