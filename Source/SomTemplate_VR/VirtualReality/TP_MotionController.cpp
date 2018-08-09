@@ -10,7 +10,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
-#include "AI/Navigation/NavigationSystem.h"
+#include "NavigationSystem.h"
 #include "Haptics/HapticFeedbackEffect_Base.h"
 #include "Components/SceneComponent.h"
 #include "Components/ArrowComponent.h"
@@ -101,7 +101,7 @@ ATP_MotionController::ATP_MotionController()
 	GrabShpere->SetRelativeLocation(FVector(14.286342f, 0.224237f, 1.484932f));
 	GrabShpere->SetSphereRadius(10.0f);
 	GrabShpere->SetCollisionProfileName(TEXT("OverlapAllDynamic"));
-	GrabShpere->bGenerateOverlapEvents = true;
+	GrabShpere->SetGenerateOverlapEvents(true);
 	GrabShpere->OnComponentBeginOverlap.AddDynamic(this, &ATP_MotionController::OnComponentBeginOverlap);
 
 	ArcEndPoint->SetupAttachment(RootComponent);
@@ -109,7 +109,7 @@ ATP_MotionController::ATP_MotionController()
 	ArcEndPoint->bAbsoluteRotation = true;
 	ArcEndPoint->bAbsoluteScale = true;
 	ArcEndPoint->SetRelativeScale3D(FVector(0.15f, 0.15f, 0.15f));
-	ArcEndPoint->bGenerateOverlapEvents = false;
+	ArcEndPoint->SetGenerateOverlapEvents(false);
 	ArcEndPoint->SetCollisionProfileName(TEXT("NoCollision"));
 	ArcEndPoint->bVisible = false;
 	if (SM_Sphere.Succeeded())
@@ -126,7 +126,7 @@ ATP_MotionController::ATP_MotionController()
 	TeleportCylinder->bAbsoluteRotation = true;
 	TeleportCylinder->bAbsoluteScale = true;
 	TeleportCylinder->SetRelativeScale3D(FVector(0.75f, 0.75f, 1.0f));
-	TeleportCylinder->bGenerateOverlapEvents = false;
+	TeleportCylinder->SetGenerateOverlapEvents(false);
 	TeleportCylinder->SetCollisionProfileName(TEXT("NoCollision"));
 
 	if (SM_Cylinder.Succeeded())
@@ -140,7 +140,7 @@ ATP_MotionController::ATP_MotionController()
 
 	Ring->SetupAttachment(TeleportCylinder);
 	Ring->SetRelativeScale3D(FVector(0.5f, 0.5f, 0.15f));
-	Ring->bGenerateOverlapEvents = false;
+	Ring->SetGenerateOverlapEvents(false);
 	Ring->SetCollisionProfileName(TEXT("NoCollision"));
 	if (SM_FatCylinder.Succeeded())
 	{
@@ -152,7 +152,7 @@ ATP_MotionController::ATP_MotionController()
 	}
 
 	Arrow->SetupAttachment(TeleportCylinder);
-	Arrow->bGenerateOverlapEvents = false;
+	Arrow->SetGenerateOverlapEvents(false);
 	Arrow->SetCollisionProfileName(TEXT("NoCollision"));
 	if (SM_BeaconDirection.Succeeded())
 	{
@@ -166,7 +166,7 @@ ATP_MotionController::ATP_MotionController()
 	RoomScaleMesh->SetupAttachment(Arrow);
 	RoomScaleMesh->bAbsoluteRotation = true;
 	RoomScaleMesh->bAbsoluteScale = true;
-	RoomScaleMesh->bGenerateOverlapEvents = false;
+	RoomScaleMesh->SetGenerateOverlapEvents(false);
 	RoomScaleMesh->SetCollisionProfileName(TEXT("NoCollision"));
 	if (SM_Cube.Succeeded())
 	{
@@ -418,7 +418,7 @@ bool ATP_MotionController::TraceTeleportDestination(TArray<FVector>& TracePoints
 		return false;
 	}
 
-	UNavigationSystem* NaviSystem = GetWorld()->GetNavigationSystem();
+	UNavigationSystemV1* NaviSystem = UNavigationSystemV1::GetNavigationSystem(GetWorld());
 	FVector Point = PredictResult.HitResult.Location;
 	FNavLocation ProjectedLocation;
 	FVector ProjectNavExtends = FVector(500.0f, 500.0f, 500.0f);
@@ -594,7 +594,7 @@ void ATP_MotionController::UpdateRoomScaleOutline()
 
 		// Epic Comment :D // Relative HMD Location from Origin
 		UHeadMountedDisplayFunctionLibrary::GetOrientationAndPosition(DeviceRotation, DevicePosition);
-
+		
 		FRotator MyRotation = FRotator(0.0f, DeviceRotation.Yaw, 0.0f);
 
 		FVector RotateResult = MyRotation.UnrotateVector(FVector(DevicePosition.X, DevicePosition.Y, 0.0f));
@@ -616,10 +616,7 @@ void ATP_MotionController::RumbleController(float Intensity)
 	else
 	{
 		// SomWorks :D // GamePad ForceFeedback, Deprecated in Epic Template
-		FLatentActionInfo ActionInfo;
-		ActionInfo.CallbackTarget = this;
-
-		MyPlayerController->PlayDynamicForceFeedback(Intensity, 0.1f, true, true, true, true, EDynamicForceFeedbackAction::Start, ActionInfo);
+		MyPlayerController->PlayDynamicForceFeedback(Intensity, 0.1f, true, true, true, true, EDynamicForceFeedbackAction::Start);
 	}
 }
 

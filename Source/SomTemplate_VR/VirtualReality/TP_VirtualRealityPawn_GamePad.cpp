@@ -9,7 +9,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
-#include "AI/Navigation/NavigationSystem.h"
+#include "NavigationSystem.h"
 #include "GameFramework/InputSettings.h"
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
@@ -56,7 +56,7 @@ ATP_VirtualRealityPawn_GamePad::ATP_VirtualRealityPawn_GamePad()
 	TeleportPin->bAbsoluteLocation = true;
 	TeleportPin->bAbsoluteRotation = true;
 	TeleportPin->SetRelativeScale3D(FVector(0.75f, 0.75f, 1.0f));
-	TeleportPin->bGenerateOverlapEvents = false;
+	TeleportPin->SetGenerateOverlapEvents(false);
 	TeleportPin->SetCollisionProfileName(TEXT("NoCollision"));
 	if (SM_Cylinder.Succeeded())
 	{
@@ -69,7 +69,7 @@ ATP_VirtualRealityPawn_GamePad::ATP_VirtualRealityPawn_GamePad()
 
 	Ring->SetupAttachment(TeleportPin);
 	Ring->SetRelativeScale3D(FVector(0.5f, 0.5f, 0.15f));
-	Ring->bGenerateOverlapEvents = false;
+	Ring->SetGenerateOverlapEvents(false);
 	Ring->SetCollisionProfileName(TEXT("NoCollision"));
 	if (SM_FatCylinder.Succeeded())
 	{
@@ -81,7 +81,7 @@ ATP_VirtualRealityPawn_GamePad::ATP_VirtualRealityPawn_GamePad()
 	}
 
 	Arrow->SetupAttachment(TeleportPin);
-	Arrow->bGenerateOverlapEvents = false;
+	Arrow->SetGenerateOverlapEvents(false);
 	Arrow->SetCollisionProfileName(TEXT("NoCollision"));
 	if (SM_BeaconDirection.Succeeded())
 	{
@@ -278,7 +278,8 @@ bool ATP_VirtualRealityPawn_GamePad::GetTeleportDestination(FVector& MyLocation,
 		return false;
 	}
 
-	UNavigationSystem* NaviSystem = GetWorld()->GetNavigationSystem();
+	UNavigationSystemV1* NaviSystem = UNavigationSystemV1::GetNavigationSystem(GetWorld());
+	
 	FVector Point = PredictResult.HitResult.Location;
 	FNavLocation ProjectedLocation;
 	FVector ProjectNavExtends = FVector(100.0f, 100.0f, 100.0f);

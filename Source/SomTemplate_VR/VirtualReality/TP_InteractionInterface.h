@@ -25,5 +25,4 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "VRTemplate|BPI_Lowlevel|Player")
 	void Drop();
-	
 };
