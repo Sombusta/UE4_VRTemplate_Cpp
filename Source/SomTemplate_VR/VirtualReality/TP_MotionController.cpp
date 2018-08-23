@@ -22,6 +22,8 @@
 #include "Components/PrimitiveComponent.h"
 #include "MotionControllerComponent.h"
 #include "SteamVRChaperoneComponent.h"
+#include "Engine/StaticMesh.h"
+#include "Engine/SkeletalMesh.h"
 #include "Materials/Material.h"
 #include "Materials/MaterialInstanceConstant.h"
 
