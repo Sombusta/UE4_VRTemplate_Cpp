@@ -1,7 +1,7 @@
 ﻿# SomTemplate_VR
 UE4 VR Template Convert Full C++ Project.
 
-- Support Unreal Engine 4 Version : 4.18, 4.19, 4.20
+- Support Unreal Engine 4 Version : 4.18, 4.19, 4.20, 4.21
 - Blueprints VR Template -> Full C++ VR Template
 
 ---------------------
@@ -18,7 +18,7 @@ Thank you!
 
 이 프로젝트는 언리얼 엔진 4의 기본 VR Template을 기반으로 모든 블루프린트를 C++로 포팅한 프로젝트입니다.
 
-기본적인 구성과 사용 방식은 블루프린트 버전 VR Template과 동일하게 사용가능합니다. 
+기본적인 구성과 사용 방식은 블루프린트 버전 VR Template과 동일하게 사용 가능합니다. 
 
 마지막으로 이 프로젝트는 MIT 라이센스를 기반으로 오픈 소스 공유를 허용합니다.
 
