@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2018 Sombusta, All Rights Reserved.
+// Copyright (c) 2014-2019 Sombusta, All Rights Reserved.
 // SomWorks :D // MIT LICENSE // Epic VR Template Convert C++ Open Source Project.
 
 #pragma once
@@ -18,11 +18,10 @@ class SOMTEMPLATE_VR_API ITP_InteractionInterface
 	GENERATED_BODY()
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
-public:
-	
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "VRTemplate|BPI_Lowlevel|Player")
+public:	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "VRTemplate|BPI_Lowlevel|Player")
 	void Pickup(class USceneComponent* AttachTo);
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "VRTemplate|BPI_Lowlevel|Player")
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "VRTemplate|BPI_Lowlevel|Player")
 	void Drop();
 };

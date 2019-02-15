@@ -2,7 +2,7 @@
 	"FileVersion": 3,
 	"EngineAssociation": "4.20",
 	"Category": "Template",
-	"Description": "// SomWorks :D // Epic VR Template Convert C++ Open Source Project.",
+	"Description": "// SomWorks :D // UE4 VR Template Convert C++ Open Source Project.",
 	"Modules": [
 		{
 			"Name": "SomTemplate_VR",
