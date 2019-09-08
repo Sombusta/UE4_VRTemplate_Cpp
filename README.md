@@ -1,7 +1,7 @@
-﻿# SomTemplate_VR
+# SomTemplate_VR
 UE4 VR Template Convert Full C++ Project.
 
-- Support Unreal Engine 4 Version : 4.18, 4.19, 4.20, 4.21, 4.22
+- Support Unreal Engine 4 Version : 4.18, 4.19, 4.20, 4.21, 4.22, 4.23
 - Blueprints VR Template -> Full C++ VR Template
 
 ---------------------

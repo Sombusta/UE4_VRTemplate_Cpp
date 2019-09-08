@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "4.22",
+	"EngineAssociation": "4.23",
 	"Category": "Template",
 	"Description": "// SomWorks :D // UE4 VR Template Convert C++ Open Source Project.",
 	"Modules": [
