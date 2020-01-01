@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2019 Sombusta, All Rights Reserved.
+// Copyright (c) 2014-2020 Sombusta, All Rights Reserved.
 // SomWorks :D // MIT LICENSE // Epic VR Template Convert C++ Open Source Project.
 
 #include "TP_VirtualRealityPawn_Motion.h"
@@ -204,7 +204,12 @@ FRotator ATP_VirtualRealityPawn_Motion::GetRotationFromInput(float UpAxis, float
 	{
 		// Epic Comment :D // Get Roll difference since we initiated the teleport. (Allows Wrist to change the pawn orientation when teleporting)
 		FTransform InitialControllerTransform = FTransform(MotionController->GetInitialControllerRotation(), FVector(0.0f, 0.0f, 0.0f), FVector(1.0f, 1.0f, 1.0f));
-		FTransform ConvertTransformResult = UKismetMathLibrary::ConvertTransformToRelative(InitialControllerTransform, MotionController->GetMotionController()->GetComponentTransform());
+		
+		// SomWorks :D // 4.23 Code
+		// FTransform ConvertTransformResult = UKismetMathLibrary::ConvertTransformToRelative(InitialControllerTransform, MotionController->GetMotionController()->GetComponentTransform());
+		
+		// SomWorks :D // 4.24 Code Update
+		FTransform ConvertTransformResult =	UKismetMathLibrary::MakeRelativeTransform(MotionController->GetMotionController()->GetComponentTransform(), InitialControllerTransform);
 
 		// Epic Comment :D // Multiply to make 180 spins of orientation much easier.
 		float ConvertTransRotationRoll = ConvertTransformResult.Rotator().Roll * 3;

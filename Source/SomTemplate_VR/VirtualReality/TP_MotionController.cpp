@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2019 Sombusta, All Rights Reserved.
+// Copyright (c) 2014-2020 Sombusta, All Rights Reserved.
 // SomWorks :D // MIT LICENSE // Epic VR Template Convert C++ Open Source Project.
 
 #include "TP_MotionController.h"
@@ -107,13 +107,16 @@ ATP_MotionController::ATP_MotionController()
 	GrabShpere->OnComponentBeginOverlap.AddDynamic(this, &ATP_MotionController::OnComponentBeginOverlap);
 
 	ArcEndPoint->SetupAttachment(RootComponent);
-	ArcEndPoint->bAbsoluteLocation = true;
-	ArcEndPoint->bAbsoluteRotation = true;
-	ArcEndPoint->bAbsoluteScale = true;
+	
+	// SomWorks :D // 4.24 Update
+	ArcEndPoint->SetUsingAbsoluteLocation(true); // 4.23 Code // ArcEndPoint->bAbsoluteLocation = true;
+	ArcEndPoint->SetUsingAbsoluteRotation(true); // 4.23 Code // ArcEndPoint->bAbsoluteRotation = true;
+	ArcEndPoint->SetUsingAbsoluteScale(true); // 4.23 Code // ArcEndPoint->bAbsoluteScale = true;
+
 	ArcEndPoint->SetRelativeScale3D(FVector(0.15f, 0.15f, 0.15f));
 	ArcEndPoint->SetGenerateOverlapEvents(false);
 	ArcEndPoint->SetCollisionProfileName(TEXT("NoCollision"));
-	ArcEndPoint->bVisible = false;
+	ArcEndPoint->SetVisibility(false); // 4.23 Code // ArcEndPoint->bVisible = false; 
 	if (SM_Sphere.Succeeded())
 	{
 		ArcEndPoint->SetStaticMesh(SM_Sphere.Object);
@@ -124,9 +127,9 @@ ATP_MotionController::ATP_MotionController()
 	}
 
 	TeleportCylinder->SetupAttachment(RootComponent);
-	TeleportCylinder->bAbsoluteLocation = true;
-	TeleportCylinder->bAbsoluteRotation = true;
-	TeleportCylinder->bAbsoluteScale = true;
+	TeleportCylinder->SetUsingAbsoluteLocation(true); // 4.23 Code // TeleportCylinder->bAbsoluteLocation = true;
+	TeleportCylinder->SetUsingAbsoluteRotation(true); // 4.23 Code // TeleportCylinder->bAbsoluteRotation = true;
+	TeleportCylinder->SetUsingAbsoluteScale(true); // 4.23 Code // TeleportCylinder->bAbsoluteScale = true;
 	TeleportCylinder->SetRelativeScale3D(FVector(0.75f, 0.75f, 1.0f));
 	TeleportCylinder->SetGenerateOverlapEvents(false);
 	TeleportCylinder->SetCollisionProfileName(TEXT("NoCollision"));
@@ -166,8 +169,8 @@ ATP_MotionController::ATP_MotionController()
 	}
 
 	RoomScaleMesh->SetupAttachment(Arrow);
-	RoomScaleMesh->bAbsoluteRotation = true;
-	RoomScaleMesh->bAbsoluteScale = true;
+	RoomScaleMesh->SetUsingAbsoluteRotation(true); // 4.23 Code // RoomScaleMesh->bAbsoluteRotation = true;
+	RoomScaleMesh->SetUsingAbsoluteScale(true); // 4.23 Code // RoomScaleMesh->bAbsoluteScale = true;
 	RoomScaleMesh->SetGenerateOverlapEvents(false);
 	RoomScaleMesh->SetCollisionProfileName(TEXT("NoCollision"));
 	if (SM_Cube.Succeeded())

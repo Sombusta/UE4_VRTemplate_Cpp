@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2019 Sombusta, All Rights Reserved.
+// Copyright (c) 2014-2020 Sombusta, All Rights Reserved.
 // SomWorks :D // MIT LICENSE // Epic VR Template Convert C++ Open Source Project.
 
 #include "TP_VirtualRealityPawn_GamePad.h"
@@ -54,8 +54,8 @@ ATP_VirtualRealityPawn_GamePad::ATP_VirtualRealityPawn_GamePad()
 	TraceDirection->SetRelativeRotation(FRotator(-10.0f, 0.0f, 0.0f));
 
 	TeleportPin->SetupAttachment(RootComponent);
-	TeleportPin->bAbsoluteLocation = true;
-	TeleportPin->bAbsoluteRotation = true;
+	TeleportPin->SetUsingAbsoluteLocation(true); // 4.23 Code // TeleportPin->bAbsoluteLocation = true;
+	TeleportPin->SetUsingAbsoluteRotation(true); // 4.23 Code // TeleportPin->bAbsoluteRotation = true;
 	TeleportPin->SetRelativeScale3D(FVector(0.75f, 0.75f, 1.0f));
 	TeleportPin->SetGenerateOverlapEvents(false);
 	TeleportPin->SetCollisionProfileName(TEXT("NoCollision"));
