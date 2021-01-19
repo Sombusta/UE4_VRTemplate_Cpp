@@ -1,7 +1,7 @@
 # SomTemplate_VR
 UE4 VR Template Convert Full C++ Project.
 
-- Support Unreal Engine 4 Version : 4.18, 4.19, 4.20, 4.21, 4.22, 4.23, 4.24 
+- Support Unreal Engine 4 Version : 4.18, 4.19, 4.20, 4.21, 4.22, 4.23, 4.24, 4.25, 4.26 
 - Blueprints VR Template -> Full C++ VR Template
 
 ---------------------
@@ -32,7 +32,7 @@ Thank you!
 
 The MIT License (MIT)
 
-Copyright (c) 2014-2020 Sombusta, All Rights Reserved.
+Copyright (c) 2014-2021 Sombusta, All Rights Reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
